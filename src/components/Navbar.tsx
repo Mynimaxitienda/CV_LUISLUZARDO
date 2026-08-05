@@ -83,11 +83,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, setActiveSection 
               </div>
               <div className="text-xs text-slate-400 flex items-center gap-1.5">
                 <span>WebApp & Cloud Architect</span>
-                {isScrolled && (
-                  <span className="text-[10px] text-amber-400/90 font-mono hidden sm:inline-block">
-                    • Header Fijo Activo
-                  </span>
-                )}
               </div>
             </div>
           </button>
