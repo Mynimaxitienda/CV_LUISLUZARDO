@@ -1,12 +1,15 @@
-import React from "react";
-import { MessageSquare, Phone, Mail, MapPin, Sparkles, ArrowRight, ShieldCheck, Cpu, Database, GitBranch, Terminal } from "lucide-react";
+import React, { useState } from "react";
+import { MessageSquare, Phone, Mail, MapPin, Sparkles, ArrowRight, ShieldCheck, Cpu, Database, GitBranch, Terminal, FileDown } from "lucide-react";
 import { PERSONAL_INFO } from "../data/portfolioData";
+import { CVDownloadModal } from "./CVDownloadModal";
 
 interface HeroProps {
   onContactClick: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false);
+
   return (
     <section id="inicio" className="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
       {/* Background Deep Blue Radial Gradients */}
@@ -69,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
             </div>
 
             {/* Primary Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-4">
               {/* WhatsApp Glow CTA */}
               <a
                 href={PERSONAL_INFO.whatsappUrl}
@@ -84,10 +87,25 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
               {/* Direct Contact CTA */}
               <button
                 onClick={onContactClick}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-orange-500/40 hover:border-orange-400 font-bold text-base transition-all duration-300 flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(249,115,22,0.2)] group"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-orange-500/40 hover:border-orange-400 font-bold text-base transition-all duration-300 flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(249,115,22,0.2)] group cursor-pointer"
               >
                 <span>Ver Contacto Directo</span>
                 <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              {/* Download CV PDF Button with Active Attention Effect */}
+              <button
+                onClick={() => setIsCVModalOpen(true)}
+                className="relative w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-amber-300 border-2 border-amber-400/80 hover:border-amber-300 font-extrabold text-base transition-all duration-300 flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] group cursor-pointer overflow-hidden"
+              >
+                {/* Active React Attention Ping Indicator */}
+                <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
+                </span>
+
+                <FileDown className="w-5 h-5 text-amber-400 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform" />
+                <span>Descargar CV PDF</span>
               </button>
             </div>
 
@@ -210,6 +228,9 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
 
         </div>
       </div>
+
+      {/* CV Download Verification Modal */}
+      <CVDownloadModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
     </section>
   );
 };
