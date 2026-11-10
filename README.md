@@ -19,6 +19,8 @@
 
 </div>
 
+## 💽 Actualizado - Portafolio activo en desarrollo con React + TypeScript + Firebase
+
 ---
 
 ## 🚀 Características Principales
